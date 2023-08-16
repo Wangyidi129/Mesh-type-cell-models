@@ -7,7 +7,7 @@ The node file and the element file are needed for TetGen format.
 The node file represents the serial number and 3D coordinates of the points in the tetrahedron geometry, with its suffix of “.node”; 
 the element file denotes the index of facets composed of points in node files, with the suffix of “.ele”. 
 The corresponding material for each facet was identified by the “universe” number in the Cell tally and the “mat” number in the Material tally in the ".inp" file.
-Also, "tfile=Beas2B" can be replaced to other cell name in the list.
+Also, "tfile=Beas2B" in Line.63 of "Beas2B.inp" can be replaced to other cell name in the list.
 
 Cell list in the "cell-models" folder:
 1. Bronchial epithelial cell (Beas-2B): "Beas2B.ele" and "Beas2B.node".
