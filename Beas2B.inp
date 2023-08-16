@@ -1,0 +1,117 @@
+[ Parameters ]
+ icntl    =         0          # (D=0) 3:ECH 5:NOR 6:SRC 7,8:GSH 11:DSH 12:DUMP
+ maxcas   =     10000          # (D=10) number of particles per one batch
+ maxbch   =       100          # (D=10) number of batches
+ file(1)  = c:/phits           # (D=c:/phits) PHITS install folder name
+ file(6)  = phits.out          # (D=phits.out) general output file name
+ itetvol  =         1          # (D=0) =1 Volume calculation for tetrahedrons
+    negs  =         1
+emin(12)  =1e-3
+emin(13)  =1e-3
+
+[ Source ]
+   s-type =   1                  # mono-energetic axial source
+     proj =   electron           # kind of incident particle, table4.4
+       x0 =   0.00
+       y0 =   0.00  
+       z0 =   0.005
+       z1 =   0.005
+       r0 =   0.005
+       r1 =   0 
+      dir =   -1
+       e0 =   0.52               # MeV/n
+
+
+[ Material ]
+MAT[1] !  air
+      12C     -0.000124		        ! Element, Element weights   
+      14N     -0.755267		        !                            
+      16O     -0.231781		        !                            
+     40Ar     -0.012828
+     
+MAT[2] ! water
+      H    2
+      O   1
+      
+MAT[100] !  cell cyto
+      H    2
+      O   1
+      
+MAT[200] !  cell nucl
+      H    2
+      O   1
+      
+      
+[ Mat Name Color ]
+mat        name        size        color
+   0       void          1       lightgray
+   1        air          1      pastelcyan
+   2      water          1            cyan
+ 100   Cellcyto          1           brown
+ 200   Cellnucl          1    orangeyellow
+
+  
+ 
+  
+[ Surface ]
+  10  rpp   -0.0048  0.0048  -0.0048  0.0048  -0.0048  0.0048
+  20  rpp   -0.0049  0.0049  -0.0049  0.0049  -0.0049  0.0049
+  90  so    0.2
+
+
+[ Cell ]
+  00001       2      -1       -20             U=15000 LAT=3 tfile=Beas2B
+  00002       2      -1       -10             FILL=15000
+  00003       2      -1       -20      10
+  00004       0       -90      20
+  00005      -1        90   
+ 00100       100        -1        -90     u=100 
+ 00200       200        -1.06     -90     u=200 
+
+
+
+[ T-deposit ]off
+     file =  deposit-dose1.out
+     mesh =  reg
+     reg  =  00100 00200
+     unit =    0            # unit is [Gy/source]
+ material =  all            # (D=all) number of specific material
+   output =  dose           # total deposit energy
+     axis =   reg           # axis of output
+     part =  all      
+    gshow =    0            # 0: no 1:bnd, 2:bnd+mat, 3:bnd+reg 4:bnd+lat
+   epsout =    1            # (D=0) generate eps file by ANGEL
+
+
+[ T-deposit ] 
+     file =  deposit-edep.out
+     mesh =  reg
+     reg  =  00100 00200
+     unit =    2            # unit is [MeV/source]
+ material =  all            # (D=all) number of specific material
+   output =  dose           # total deposit energy
+     axis =   reg           # axis of output
+     part =  all      
+    gshow =    0            # 0: no 1:bnd, 2:bnd+mat, 3:bnd+reg 4:bnd+lat
+   epsout =    0            # (D=0) generate eps file by ANGEL
+
+
+[ T - gshow ]
+     mesh = xyz
+   x-type = 2 
+       nx = 100
+     xmin = -0.005
+     xmax = 0.005
+   y-type = 1
+       ny = 1
+            -0.005 0.005
+   z-type = 2 
+       nz = 100
+     zmin = -0.005
+     zmax = 0.005
+     axis = xz 
+   output = 2
+     file = Beas2Bshow.dat 
+   epsout = 1
+
+ [End]
